@@ -15,7 +15,7 @@
     "license": [
         "MIT"
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "dev-master",
     "require": {
         "php": ">=5.3.9"
     },
