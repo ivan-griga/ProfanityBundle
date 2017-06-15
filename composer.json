@@ -1,0 +1,30 @@
+{
+    "name": "ivan-griga/ProfanityBundle",
+    "description": "Checker for bad words.",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Ivan Griga",
+            "email": "grigaivan2@gmail.com"
+        }
+    ],
+    "keywords": [
+        "Profanity",
+        "Bad words"
+    ],
+    "license": [
+        "MIT"
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.9"
+    },
+    "autoload": {
+        "psr-4": {"Vangr\\ProfanityBundle\\": ""}
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev-master"
+        }
+    }
+}
