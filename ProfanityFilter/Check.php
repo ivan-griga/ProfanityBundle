@@ -3,7 +3,7 @@
 namespace Vangr\ProfanityBundle\ProfanityFilter;
 
 /**
- * Class Check fork from
+ * Fork from mofodojodino/profanity-filter
  * @package Vangr\ProfanityBundle\ProfanityFilter
  */
 class Check
