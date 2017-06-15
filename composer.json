@@ -1,5 +1,5 @@
 {
-    "name": "ivan-griga/ProfanityBundle",
+    "name": "vangr/ProfanityBundle",
     "description": "Checker for bad words.",
     "type": "symfony-bundle",
     "authors": [
