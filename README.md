@@ -30,6 +30,8 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
       If you want to use a database to store your profanities:
 
     php app/console doctrine:schema:update --force
+        For populate default profanities data
+    php app/console vangrg:profanities:populate
    </li>
 </ul>
 

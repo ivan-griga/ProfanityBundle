@@ -9,15 +9,15 @@ use Symfony\Component\Console\Input\InputOption;
 use Vangrg\ProfanityBundle\Entity\Profanity;
 
 /**
- * Class ProfanitiesLoadCommand
+ * Class ProfanitiesPopulateCommand
  * @package Vangrg\ProfanityBundle\Command
  */
-class ProfanitiesLoadCommand extends ContainerAwareCommand
+class ProfanitiesPopulateCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('vangrg:profanities:load')
+            ->setName('vangrg:profanities:populate')
             ->setDescription('Load profanities into database.')
             ->addOption('connection',
                 null,
