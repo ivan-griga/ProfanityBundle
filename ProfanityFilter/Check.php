@@ -1,10 +1,10 @@
 <?php
 
-namespace Vangr\ProfanityBundle\ProfanityFilter;
+namespace Vangrg\ProfanityBundle\ProfanityFilter;
 
 /**
  * Fork from mofodojodino/profanity-filter
- * @package Vangr\ProfanityBundle\ProfanityFilter
+ * @package Vangrg\ProfanityBundle\ProfanityFilter
  */
 class Check
 {

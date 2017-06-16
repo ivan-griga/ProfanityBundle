@@ -1,6 +1,6 @@
 <?php
 
-namespace Vangr\ProfanityBundle\Entity;
+namespace Vangrg\ProfanityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -8,10 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Profanity
- * @package Vangr\ProfanityBundle\Entity
+ * @package Vangrg\ProfanityBundle\Entity
  *
  * @ORM\Table(name="profanities")
- * @ORM\Entity(repositoryClass="Vangr\ProfanityBundle\Entity\ProfanityRepository")
+ * @ORM\Entity(repositoryClass="Vangrg\ProfanityBundle\Entity\ProfanityRepository")
  * @UniqueEntity(fields={"word"}, message="This word is already taken.")
  */
 class Profanity

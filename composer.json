@@ -1,5 +1,5 @@
 {
-    "name": "vangr/ProfanityBundle",
+    "name": "vangrg/profanity-bundle",
     "description": "Checker for bad words.",
     "type": "symfony-bundle",
     "authors": [
@@ -15,12 +15,12 @@
     "license": [
         "MIT"
     ],
-    "minimum-stability": "dev-master",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.9"
     },
     "autoload": {
-        "psr-4": {"Vangr\\ProfanityBundle\\": ""}
+        "psr-4": {"Vangrg\\ProfanityBundle\\": ""}
     },
     "extra": {
         "branch-alias": {

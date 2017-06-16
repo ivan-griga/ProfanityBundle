@@ -1,12 +1,12 @@
 <?php
 
-namespace Vangr\ProfanityBundle\Entity;
+namespace Vangrg\ProfanityBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
 /**
  * Class ProfanityRepository
- * @package Vangr\ProfanityBundle\Entity
+ * @package Vangrg\ProfanityBundle\Entity
  */
 class ProfanityRepository extends EntityRepository
 {
