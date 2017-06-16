@@ -1,33 +1,35 @@
-Profanity Filter Bundle
+<h1>Profanity Filter Bundle</h1>
 
 A symfony bundle to test if a string has a profanity in it.
-Checks performed
-Straight matching
 
+<b>Straight matching</b>
 Checks string for profanity as it is against list of bad words. E.g. badword
-Substitution
 
+<b>Substitution</b>
 Checks string for profanity with characters substituted for each letter. E.g. bâdΨ0rd
-Obscured
 
+<b>Obscured</b>
 Checks string for profanity obscured with punctuation between. E.g. b|a|d|w|o|r|d
 
-Combinations
-
+<b>Combinations</b>
 Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
-Installation
 
-Install this package via composer.
+<h4>Installation</h4>
+<ul>
+  <li>
+    Install this package via composer.
 
-php composer.phar require vangrg/profanity-bundle
+    <pre>php composer.phar require vangrg/profanity-bundle</pre>
+  </li>
+  <li>
+    Add to your AppKernel.php:
 
-Add to your AppKernel.php:
+    new Vangrg\ProfanityBundle\VangrgProfanityBundle(),
+   </li>
+   <li>
+      If you want to use a database to store your profanities:
 
-new Vangrg\ProfanityBundle\VangrgProfanityBundle(),
-
-
-If you want to use a database to store your profanities:
-
-php app/console doctrine:schema:update --force
-
+      <pre>php app/console doctrine:schema:update --force</pre>
+   </li>
+</ul>
 
