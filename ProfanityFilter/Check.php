@@ -190,9 +190,8 @@ class Check
             );
         }
 
-        foreach ($profanities as $key => $profanity) {
+        foreach ($profanities as $profanity) {
             if ($this->stringHasProfanity($string, $profanity)) {
-                var_dump($profanity);var_dump($this->profanities[$key]);
                 return true;
             }
         }
