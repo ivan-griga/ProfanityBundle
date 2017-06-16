@@ -14,7 +14,7 @@ Checks string for profanity obscured with punctuation between. E.g. b|a|d|w|o|r|
 <b>Combinations</b>
 Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 
-<h4>Installation</h4>
+<h2>Installation</h2>
 <ul>
   <li>
     Install this package via composer.
