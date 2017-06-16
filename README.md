@@ -29,7 +29,29 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
    <li>
       If you want to use a database to store your profanities:
 
-      php app/console doctrine:schema:update --force
+    php app/console doctrine:schema:update --force
    </li>
 </ul>
 
+<h2>Usage</h2>
+<code>
+/* default constructor */
+    $check = new Check();
+    $hasProfanity = $check->hasProfanity($badWords);
+    $cleanWords = $check->obfuscateIfProfane($badWords);
+
+/* customized word list from file */<br>
+$check = new Check('path.to/wordlist.php');
+
+/* customized word list from array */
+$badWords = array('bad', 'words') 
+/* or load from db */
+$badWords = $this->getDoctrine()->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
+    ->getRepository('VangrgProfanityBundle:Profanity')->getProfanitiesArray()
+$check = new Check($badWords);
+</code>
+<h2>Kudos</h2>
+
+Bundle is built on the basis of the library
+
+https://github.com/mofodojodino/ProfanityFilter
