@@ -52,6 +52,6 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
           
     $check = new Check($badWords);
 </pre>
-<h2>Kudos</h2>
-Bundle is built on the basis of the library
+<h2>Remark</h2>
+Bundle is built on the basis of the library with modifications in filter logic
 https://github.com/mofodojodino/ProfanityFilter
