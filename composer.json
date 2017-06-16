@@ -17,7 +17,9 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.9"
+        "php": ">=5.3.9",
+        "symfony/framework-bundle": "^2.7|^3.0",
+        "doctrine/orm": "^2.2"
     },
     "autoload": {
         "psr-4": {"Vangrg\\ProfanityBundle\\": ""}
