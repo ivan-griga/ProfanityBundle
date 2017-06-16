@@ -19,7 +19,7 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
   <li>
     Install this package via composer.
 
-    <pre>php composer.phar require vangrg/profanity-bundle</pre>
+    php composer.phar require vangrg/profanity-bundle
   </li>
   <li>
     Add to your AppKernel.php:
@@ -29,7 +29,7 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
    <li>
       If you want to use a database to store your profanities:
 
-      <pre>php app/console doctrine:schema:update --force</pre>
+      php app/console doctrine:schema:update --force
    </li>
 </ul>
 
