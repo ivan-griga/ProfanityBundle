@@ -18,8 +18,10 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.9",
-        "symfony/framework-bundle": "^2.7|^3.0",
-        "doctrine/orm": "^2.2"
+        "symfony/framework-bundle": "^2.7|^3.0"
+    },
+    "suggest": {
+        "doctrine/orm": ""
     },
     "autoload": {
         "psr-4": {"Vangrg\\ProfanityBundle\\": ""}
