@@ -34,24 +34,24 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 </ul>
 
 <h2>Usage</h2>
-<code>
+
+<pre>
 /* default constructor */
     $check = new Check();
     $hasProfanity = $check->hasProfanity($badWords);
     $cleanWords = $check->obfuscateIfProfane($badWords);
 
-/* customized word list from file */<br>
-$check = new Check('path.to/wordlist.php');
+/* customized word list from file */
+    $check = new Check('path.to/wordlist.php');
 
 /* customized word list from array */
-$badWords = array('bad', 'words') 
+    $badWords = array('bad', 'words') 
+    
 /* or load from db */
-$badWords = $this->getDoctrine()->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
-    ->getRepository('VangrgProfanityBundle:Profanity')->getProfanitiesArray()
-$check = new Check($badWords);
-</code>
+    $badWords = $this->getDoctrine()->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
+          ->getRepository('VangrgProfanityBundle:Profanity')->getProfanitiesArray()
+    $check = new Check($badWords);
+</pre>
 <h2>Kudos</h2>
-
 Bundle is built on the basis of the library
-
 https://github.com/mofodojodino/ProfanityFilter
