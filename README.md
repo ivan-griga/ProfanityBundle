@@ -59,4 +59,4 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 </pre>
 <h2>Remark</h2>
 Bundle is built on the basis of the library 
-https://github.com/mofodojodino/ProfanityFilter with modifications in filter logic
+https://github.com/mofodojodino/ProfanityFilter with an improvement in the logic of the filter
