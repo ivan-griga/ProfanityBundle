@@ -1,14 +1,41 @@
 <?php
 
-namespace Vangrg\ProfanityBundle\ProfanityFilter;
+namespace Vangrg\ProfanityBundle\Service;
+
+use Vangrg\ProfanityBundle\Storage\ProfanitiesStorageInterface;
 
 /**
- * Fork from mofodojodino/profanity-filter and modify expressions.
- * @package Vangrg\ProfanityBundle\ProfanityFilter
+ * Class Check
+ * @package Vangrg\ProfanityBundle\Service
  */
 class Check
 {
     const SEPARATOR_PLACEHOLDER = '{!!}';
+
+    /**
+     * @var ProfanitiesStorageInterface
+     */
+    private $storage;
+
+    /**
+     * @var string
+     */
+    private $currentExpression = '';
+
+    /**
+     * @var string
+     */
+    private $currentProfanity = '';
+
+    /**
+     * @var array
+     */
+    private $regularExpressions = [];
+
+    /**
+     * @var array
+     */
+    private $profanities = [];
 
     /**
      * Escaped separator characters
@@ -16,7 +43,6 @@ class Check
     protected $escapedSeparatorCharacters = array(
         '\s',
     );
-
     /**
      * Unescaped separator characters.
      * @var array
@@ -54,8 +80,6 @@ class Check
         '.',
         '/',
     );
-
-
     /**
      * List of potential character substitutions as a regular expression.
      *
@@ -138,29 +162,16 @@ class Check
         '/z/' => array('z', 'Ζ', 'ž', 'Ž', 'ź', 'Ź', 'ż', 'Ż'),
     );
 
-    /**
-     * List of profanities to test against.
-     *
-     * @var array
-     */
-    protected $profanities = array();
-    protected $separatorExpression;
-    protected $characterExpressions;
+    private $separatorExpression;
+    private $characterExpressions;
 
     /**
-     * @param null $config
+     * Check constructor.
+     * @param ProfanitiesStorageInterface $storage
      */
-    public function __construct($config = null)
+    public function __construct(ProfanitiesStorageInterface $storage)
     {
-        if ($config === null) {
-            $config = __DIR__ . '/../data/profanities.php';
-        }
-
-        if (is_array($config)) {
-            $this->profanities = $config;
-        } else {
-            $this->profanities = $this->loadProfanitiesFromFile($config);
-        }
+        $this->storage = $storage;
 
         $this->separatorExpression  = $this->generateSeparatorExpression();
         $this->characterExpressions = $this->generateCharacterExpressions();
@@ -179,19 +190,15 @@ class Check
             return false;
         }
 
-        $profanities    = array();
-        $profanityCount = count($this->profanities);
+        $this->currentExpression = '';
+        $this->currentProfanity = '';
 
-        for ($i = 0; $i < $profanityCount; $i++) {
-            $profanities[ $i ] = $this->generateProfanityExpression(
-                $this->profanities[ $i ],
-                $this->characterExpressions,
-                $this->separatorExpression
-            );
-        }
+        $expressions = $this->generateRegularExpressions();
 
-        foreach ($profanities as $profanity) {
-            if ($this->stringHasProfanity($string, $profanity)) {
+        foreach ($expressions as $key => $expression) {
+            if ($this->stringHasProfanity($string, $expression)) {
+                $this->currentExpression = $expression;
+                $this->currentProfanity = $this->profanities[$key];
                 return true;
             }
         }
@@ -200,7 +207,7 @@ class Check
     }
 
     /**
-     * Obfuscates string that contains a 'profanity'.
+     * Obfuscated a 'profanity' in the string.
      *
      * @param $string
      *
@@ -208,11 +215,48 @@ class Check
      */
     public function obfuscateIfProfane($string)
     {
-        if ($this->hasProfanity($string)) {
-            $string = str_repeat("*", strlen($string));
+        while ($this->hasProfanity($string)) {
+            $string = preg_replace($this->currentExpression, str_repeat("*", strlen($this->currentProfanity)), $string);
         }
 
         return $string;
+    }
+
+    /**
+     * @return array
+     */
+    private function generateRegularExpressions()
+    {
+        if ( !$this->storage->checkIfDataHasChanged() && !empty($this->regularExpressions) ) {
+            return $this->regularExpressions;
+        }
+
+        $this->regularExpressions = [];
+
+        $this->profanities = $this->storage->getProfanities();
+
+        foreach ($this->profanities as $profanity) {
+            $this->regularExpressions[] = $this->generateProfanityExpression(
+                $profanity,
+                $this->characterExpressions,
+                $this->separatorExpression
+            );
+        }
+
+        return $this->regularExpressions;
+    }
+
+    /**
+     * Checks a string against a profanity.
+     *
+     * @param $string
+     * @param $expression
+     *
+     * @return bool
+     */
+    private function stringHasProfanity($string, $expression)
+    {
+        return preg_match($expression, $string) === 1;
     }
 
     /**
@@ -224,7 +268,7 @@ class Check
      *
      * @return mixed
      */
-    protected function generateProfanityExpression($word, $characterExpressions, $separatorExpression)
+    private function generateProfanityExpression($word, $characterExpressions, $separatorExpression)
     {
         $expression = '/(^|'.$separatorExpression.')'. preg_replace('/'.self::SEPARATOR_PLACEHOLDER.'$/', '', preg_replace(
                 array_keys($characterExpressions),
@@ -233,19 +277,6 @@ class Check
             )) . '($|' . $separatorExpression . ')' . '/i';
 
         return str_replace(self::SEPARATOR_PLACEHOLDER, $separatorExpression.'*', $expression);
-    }
-
-    /**
-     * Checks a string against a profanity.
-     *
-     * @param $string
-     * @param $profanity
-     *
-     * @return bool
-     */
-    private function stringHasProfanity($string, $profanity)
-    {
-        return preg_match($profanity, $string) === 1;
     }
 
     /**
@@ -283,7 +314,7 @@ class Check
      *
      * @return array
      */
-    protected function generateCharacterExpressions()
+    private function generateCharacterExpressions()
     {
         $characterExpressions = array();
         foreach ($this->characterSubstitutions as $character => $substitutions) {
@@ -294,18 +325,5 @@ class Check
         }
 
         return $characterExpressions;
-    }
-
-    /**
-     * Load 'profanities' from config file.
-     *
-     * @param $config
-     *
-     * @return array
-     */
-    private function loadProfanitiesFromFile($config)
-    {
-        /** @noinspection PhpIncludeInspection */
-        return include($config);
     }
 }

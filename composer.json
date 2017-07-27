@@ -8,7 +8,7 @@
             "email": "grigaivan2@gmail.com"
         }
     ],
-    "keywords": ["symfony", "bad", "words", "bundle", "profanity", "censor"],
+    "keywords": ["symfony", "bad", "words", "bundle", "profanity", "filter", "censor"],
     "license": [
         "MIT"
     ],

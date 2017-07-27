@@ -1,4 +1,7 @@
 services:
-#    vangrg_profanity.example:
-#        class: Vangrg\ProfanityBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    vangrg_profanity.storage:
+        class: %vangrg_profanity.storage_class%
+
+    vangrg_profanity.check:
+        class: Vangrg\ProfanityBundle\Service\Check
+        arguments: ["@vangrg_profanity.storage"]

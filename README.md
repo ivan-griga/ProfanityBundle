@@ -41,21 +41,24 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 <h2>Usage</h2>
 
 <pre>
-/* default constructor */
-    $check = new Check();
+/* default usage */
+    $check = $this->get('vangrg_profanity.check');
     $hasProfanity = $check->hasProfanity($badWords);
     $cleanWords = $check->obfuscateIfProfane($badWords);
 
-/* customized word list from file */
-    $check = new Check('path.to/wordlist.php');
-
 /* customized word list from array */
-    $badWords = array('bad', 'words') 
+    $badWords = array('bad', 'words');
     /* or load from db */
     $badWords = $this->getDoctrine()->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
-          ->getRepository('VangrgProfanityBundle:Profanity')->getProfanitiesArray()
-          
-    $check = new Check($badWords);
+          ->getRepository('VangrgProfanityBundle:Profanity')->getProfanitiesArray();
+
+    $this->get('vangrg_profanity.storage')->setProfanities($badWords);
+
+/* override profanities storage class */
+/* add to config.yml */
+    vangrg_profanity:
+        storage_class: your class // By default use 'Vangrg\ProfanityBundle\Storage\ProfanitiesStorage'
+
 </pre>
 <h2>Remark</h2>
 Bundle is built on the basis of the library 
