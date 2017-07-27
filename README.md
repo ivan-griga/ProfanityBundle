@@ -57,7 +57,7 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 /* override profanities storage class */
 /* add to config.yml */
     vangrg_profanity:
-        storage_class: your class /* By default 'Vangrg\ProfanityBundle\Storage\ProfanitiesStorage' */
+        storage_class: your class // By default use 'Vangrg\ProfanityBundle\Storage\ProfanitiesStorage'
 
 </pre>
 <h2>Remark</h2>
