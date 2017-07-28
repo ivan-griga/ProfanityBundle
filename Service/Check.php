@@ -10,12 +10,32 @@ use Vangrg\ProfanityBundle\Storage\ProfanitiesStorageInterface;
  */
 class Check
 {
+    const SEPARATOR_PLACEHOLDER = '{!!}';
+
     /**
      * @var ProfanitiesStorageInterface
      */
     private $storage;
 
-    const SEPARATOR_PLACEHOLDER = '{!!}';
+    /**
+     * @var string
+     */
+    private $currentExpression = '';
+
+    /**
+     * @var string
+     */
+    private $currentProfanity = '';
+
+    /**
+     * @var array
+     */
+    private $regularExpressions = [];
+
+    /**
+     * @var array
+     */
+    private $profanities = [];
 
     /**
      * Escaped separator characters
@@ -170,10 +190,15 @@ class Check
             return false;
         }
 
+        $this->currentExpression = '';
+        $this->currentProfanity = '';
+
         $expressions = $this->generateRegularExpressions();
 
-        foreach ($expressions as $expression) {
+        foreach ($expressions as $key => $expression) {
             if ($this->stringHasProfanity($string, $expression)) {
+                $this->currentExpression = $expression;
+                $this->currentProfanity = $this->profanities[$key];
                 return true;
             }
         }
@@ -182,7 +207,7 @@ class Check
     }
 
     /**
-     * Obfuscates string that contains a 'profanity'.
+     * Obfuscated a 'profanity' in the string.
      *
      * @param $string
      *
@@ -190,8 +215,8 @@ class Check
      */
     public function obfuscateIfProfane($string)
     {
-        if ($this->hasProfanity($string)) {
-            $string = str_repeat("*", strlen($string));
+        while ($this->hasProfanity($string)) {
+            $string = preg_replace($this->currentExpression, str_repeat("*", strlen($this->currentProfanity)), $string);
         }
 
         return $string;
@@ -202,19 +227,23 @@ class Check
      */
     private function generateRegularExpressions()
     {
-        $regularExpressions = [];
+        if ( !$this->storage->checkIfDataHasChanged() && !empty($this->regularExpressions) ) {
+            return $this->regularExpressions;
+        }
 
-        $profanities = $this->storage->getProfanities();
+        $this->regularExpressions = [];
 
-        foreach ($profanities as $profanity) {
-            $regularExpressions[] = $this->generateProfanityExpression(
+        $this->profanities = $this->storage->getProfanities();
+
+        foreach ($this->profanities as $profanity) {
+            $this->regularExpressions[] = $this->generateProfanityExpression(
                 $profanity,
                 $this->characterExpressions,
                 $this->separatorExpression
             );
         }
 
-        return $regularExpressions;
+        return $this->regularExpressions;
     }
 
     /**

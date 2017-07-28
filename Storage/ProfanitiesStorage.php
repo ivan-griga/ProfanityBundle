@@ -13,6 +13,14 @@ class ProfanitiesStorage implements ProfanitiesStorageInterface
      */
     private $profanities = [];
 
+    /**
+     * @var bool
+     */
+    private $profanitiesIsChanged = false;
+
+    /**
+     * ProfanitiesStorage constructor.
+     */
     public function __construct()
     {
         $this->profanities = $this->loadProfanitiesFromFile(__DIR__ . '/../data/profanities.php');
@@ -36,6 +44,17 @@ class ProfanitiesStorage implements ProfanitiesStorageInterface
     public function setProfanities(array $profanities)
     {
         $this->profanities = $profanities;
+        $this->profanitiesIsChanged = true;
+    }
+
+    /**
+     * Check if list of profanities has been changed.
+     *
+     * @return bool
+     */
+    public function checkIfDataHasChanged()
+    {
+        return $this->profanitiesIsChanged;
     }
 
     /**

@@ -18,4 +18,11 @@ interface ProfanitiesStorageInterface
      * @param array $profanities
      */
     public function setProfanities(array $profanities);
+
+    /**
+     * Check if list of profanities has been changed.
+     *
+     * @return bool
+     */
+    public function checkIfDataHasChanged();
 }
