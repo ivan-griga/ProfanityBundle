@@ -20,9 +20,10 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('vangrg_profanity');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('storage_class')->defaultValue('Vangrg\ProfanityBundle\Storage\ProfanitiesStorage')
+            ->end();
 
         return $treeBuilder;
     }

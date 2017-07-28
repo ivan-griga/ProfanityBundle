@@ -33,6 +33,7 @@ class ProfanitiesStorage implements ProfanitiesStorageInterface
      */
     public function getProfanities()
     {
+        $this->profanitiesIsChanged = false;
         return $this->profanities;
     }
 
