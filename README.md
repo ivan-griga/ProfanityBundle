@@ -1,46 +1,42 @@
-<h1>Profanity Filter Bundle</h1>
+# Profanity Filter Bundle
 
 A symfony bundle to test if a string has a profanity in it.
 
-<b>Straight matching</b>
+**Straight matching**
 Checks string for profanity as it is against list of bad words. E.g. badword
 
-<b>Substitution</b>
+**Substitution**
 Checks string for profanity with characters substituted for each letter. E.g. bâdΨ0rd
 
-<b>Obscured</b>
+**Obscured**
 Checks string for profanity obscured with punctuation between. E.g. b|a|d|w|o|r|d
 
-<b>Combinations</b>
+**Combinations**
 Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 
-<h2>Installation</h2>
-<ul>
-  <li>
-    Install this package via composer.
+## Installation
 
+- Install this package via composer.
+    ```
     php composer.phar require vangrg/profanity-bundle
-  </li>
-  <li>
-    Add to your AppKernel.php:
-
+    ```
+- Add to your AppKernel.php:
+    ```
     new Vangrg\ProfanityBundle\VangrgProfanityBundle(),
-   </li>
-   <li>
-      If you want to use a database to store your profanities:
-
+    ```
+- If you want to use a database to store your profanities:
+    ```
     php app/console doctrine:schema:update --force
-   </li>
-   <li>
-        For populate default profanities data:
-        
+    ```
+- For populate default profanities data:
+    ```
     php app/console vangrg:profanities:populate
-   </li>
-</ul>
+    ```
 
-<h2>Usage</h2>
+## Usage
 
-<pre>
+```php
+<?php
 /* default usage */
     $check = $this->get('vangrg_profanity.check');
     $hasProfanity = $check->hasProfanity($badWords);
@@ -58,8 +54,47 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 /* add to config.yml */
     vangrg_profanity:
         storage_class: your class // By default use 'Vangrg\ProfanityBundle\Storage\ProfanitiesStorage'
+```
 
-</pre>
-<h2>Remark</h2>
+## Annotation usage
+
+```php
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vangrg\ProfanityBundle\Validator\Constraints as ProfanityAssert;
+
+/**
+ * Post
+ *
+ * @ORM\Table(name="post")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PostRepository")
+ */
+class Post
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     * 
+     * @Assert\Length(min=8, max=64)
+     * @ProfanityAssert\ProfanityCheck
+     * @ORM\Column(name="title", type="string", length=64)
+     */
+    private $title;
+}
+```
+
+# Remark
 Bundle is built on the basis of the library 
 https://github.com/mofodojodino/ProfanityFilter with an improvement in the logic of the filter
