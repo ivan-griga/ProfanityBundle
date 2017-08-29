@@ -4,7 +4,9 @@ services:
 
     vangrg_profanity.check:
         class: Vangrg\ProfanityBundle\Service\Check
-        arguments: ["@vangrg_profanity.storage"]
+        arguments:
+            - "@vangrg_profanity.storage"
+            - %vangrg_profanity.allow_bound_by_words%
 
     vangrg_profanity.profanity_check_validator:
         class: Vangrg\ProfanityBundle\Validator\Constraints\ProfanityCheckValidator
