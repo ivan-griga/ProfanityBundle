@@ -58,7 +58,7 @@ $this->get('vangrg_profanity.storage')->setProfanities($badWords);
 ```yaml
 # add to config.yml
 vangrg_profanity:
-    storage_class: your class # By default use 'Vangrg\ProfanityBundle\Storage\ProfanitiesStorage'
+    storage: your service # By default use 'vangrg_profanity.storage.default'
     allow_bound_by_words: true # Also match profanities inside words e.g. a.r.s.esomething, somethingarse, but be careful also words like glasses
 ```
 

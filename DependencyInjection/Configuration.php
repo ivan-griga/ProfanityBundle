@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('storage_class')->defaultValue('Vangrg\ProfanityBundle\Storage\ProfanitiesStorage')->end()
+                ->scalarNode('storage')->defaultValue('vangrg_profanity.storage.default')->end()
                 ->booleanNode('allow_bound_by_words')->defaultFalse()->end()
             ->end()
         ;
