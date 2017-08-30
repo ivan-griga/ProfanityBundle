@@ -22,8 +22,11 @@ class VangrgProfanityExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('vangrg_profanity.storage_class', $config['storage_class']);
+        $container->setAlias('vangrg_profanity.storage', $config['storage']);
+
         $container->setParameter('vangrg_profanity.allow_bound_by_words', $config['allow_bound_by_words']);
+        $container->setParameter('vangrg_profanity.source.file_name', $config['profanities_source']['file_name']);
+        $container->setParameter('vangrg_profanity.source.format', $config['profanities_source']['format']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

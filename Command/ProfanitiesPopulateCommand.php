@@ -36,7 +36,7 @@ class ProfanitiesPopulateCommand extends ContainerAwareCommand
             ? $doctrine->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
             : $doctrine->getManager($connectionName);
 
-        $profanities = include(__DIR__ . '/../data/profanities.php');
+        $profanities = $this->getContainer()->get('vangrg_profanity.storage.default')->getProfanities();
 
         $i = 0;
         foreach ($profanities as $word) {
