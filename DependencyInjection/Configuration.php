@@ -22,8 +22,10 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('storage_class')->defaultValue('Vangrg\ProfanityBundle\Storage\ProfanitiesStorage')
-            ->end();
+                ->scalarNode('storage_class')->defaultValue('Vangrg\ProfanityBundle\Storage\ProfanitiesStorage')->end()
+                ->booleanNode('allow_bound_by_words')->defaultFalse()->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

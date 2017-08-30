@@ -187,15 +187,22 @@ class Check
     private $characterExpressions;
 
     /**
+     * @var bool
+     */
+    private $allowBoundByWords;
+
+    /**
      * Check constructor.
      * @param ProfanitiesStorageInterface $storage
+     * @param bool $allowBoundByWords
      */
-    public function __construct(ProfanitiesStorageInterface $storage)
+    public function __construct(ProfanitiesStorageInterface $storage, $allowBoundByWords)
     {
         $this->storage = $storage;
 
         $this->separatorExpression  = $this->generateSeparatorExpression();
         $this->characterExpressions = $this->generateCharacterExpressions();
+        $this->allowBoundByWords = $allowBoundByWords;
     }
 
     /**
@@ -291,13 +298,20 @@ class Check
      */
     private function generateProfanityExpression($word, $characterExpressions, $separatorExpression)
     {
-        $expression = '/(^|'.$separatorExpression.')'. preg_replace('/'.self::SEPARATOR_PLACEHOLDER.'$/', '', preg_replace(
+        $startOfExpression = '/(^|'.$separatorExpression.')' . $this->getOptionalWordsBounding();
+        $endOfExpression = '($|' . $separatorExpression . ')' . $this->getOptionalWordsBounding();
+        $expression = $startOfExpression . preg_replace('/'.self::SEPARATOR_PLACEHOLDER.'$/', '', preg_replace(
                 array_keys($characterExpressions),
                 array_values($characterExpressions),
                 $word
-            )) . '($|' . $separatorExpression . ')' . '/i';
+            )) . $endOfExpression . '/i';
 
         return str_replace(self::SEPARATOR_PLACEHOLDER, $separatorExpression.'*', $expression);
+    }
+
+    private function getOptionalWordsBounding()
+    {
+        return $this->allowBoundByWords ? '?' : '';
     }
 
     /**
