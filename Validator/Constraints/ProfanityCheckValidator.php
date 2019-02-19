@@ -5,7 +5,7 @@ namespace Vangrg\ProfanityBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Vangrg\ProfanityBundle\Service\Check;
+use Vangrg\ProfanityBundle\Service\ProfanityChecker;
 
 /**
  * {@inheritDoc}
@@ -13,16 +13,16 @@ use Vangrg\ProfanityBundle\Service\Check;
 final class ProfanityCheckValidator extends ConstraintValidator
 {
     /**
-     * @var Check
+     * @var ProfanityChecker
      */
     private $profanityCheck;
 
     /**
      * ProfanityCheckValidator constructor.
      *
-     * @param Check $profanityCheck
+     * @param ProfanityChecker $profanityCheck
      */
-    public function __construct(Check $profanityCheck)
+    public function __construct(ProfanityChecker $profanityCheck)
     {
         $this->profanityCheck = $profanityCheck;
     }
