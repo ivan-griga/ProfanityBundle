@@ -1,5 +1,5 @@
 services:
-    Vangrg\ProfanityBundle\Storage\ProfanitiesStorageDefault: @vangrg_profanity.storage.default
+    Vangrg\ProfanityBundle\Storage\ProfanitiesStorageDefault: "@vangrg_profanity.storage.default"
     vangrg_profanity.storage.default:
         class: Vangrg\ProfanityBundle\Storage\ProfanitiesStorageDefault
         public: true
@@ -7,7 +7,7 @@ services:
             - "%vangrg_profanity.source.file_name%"
             - "%vangrg_profanity.source.format%"
 
-    Vangrg\ProfanityBundle\Service\ProfanityChecker: @vangrg_profanity.checker
+    Vangrg\ProfanityBundle\Service\ProfanityChecker: "@vangrg_profanity.checker"
     vangrg_profanity.checker:
         class: Vangrg\ProfanityBundle\Service\ProfanityChecker
         public: true
