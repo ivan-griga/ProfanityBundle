@@ -8,7 +8,7 @@ use Vangrg\ProfanityBundle\Storage\ProfanitiesStorageInterface;
  * Class Check
  * @package Vangrg\ProfanityBundle\Service
  */
-class Check
+class ProfanityChecker
 {
     const SEPARATOR_PLACEHOLDER = '{!!}';
 

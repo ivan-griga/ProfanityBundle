@@ -2,7 +2,8 @@
 
 namespace Vangrg\ProfanityBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -12,8 +13,18 @@ use Vangrg\ProfanityBundle\Entity\Profanity;
  * Class ProfanitiesPopulateCommand
  * @package Vangrg\ProfanityBundle\Command
  */
-class ProfanitiesPopulateCommand extends ContainerAwareCommand
+class ProfanitiesPopulateCommand extends Command
 {
+    /** @var ContainerInterface */
+    private $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        parent::__construct();
+
+        $this->container = $container;
+    }
+
     protected function configure()
     {
         $this
@@ -29,14 +40,14 @@ class ProfanitiesPopulateCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $doctrine = $this->getContainer()->get('doctrine');
+        $doctrine = $this->container->get('doctrine');
 
         $connectionName = $input->getOption('connection');
         $em = (empty($connectionName) === true)
             ? $doctrine->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
             : $doctrine->getManager($connectionName);
 
-        $profanities = $this->getContainer()->get('vangrg_profanity.storage.default')->getProfanities();
+        $profanities = $this->container->get('vangrg_profanity.storage.default')->getProfanities();
 
         $i = 0;
         foreach ($profanities as $word) {
@@ -54,6 +65,6 @@ class ProfanitiesPopulateCommand extends ContainerAwareCommand
 
         $em->flush();
 
-        $output->writeln('Success.');
+        $output->writeln(sprintf('Populated %d words', $i));
     }
 }

@@ -26,11 +26,11 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
     ```
 - If you want to use a database to store your profanities:
     ```
-    php app/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
     ```
 - For populate default profanities data:
     ```
-    php app/console vangrg:profanities:populate
+    php bin/console vangrg:profanities:populate
     ```
 
 ## Usage
@@ -39,7 +39,7 @@ Also works with combinations of the above. E.g. b|â|d|Ψ|0|rr|d
 
 ```php
 <?php
-$check = $this->get('vangrg_profanity.check');
+$check = $this->get('vangrg_profanity.checker');
 $hasProfanity = $check->hasProfanity($badWords);
 $cleanWords = $check->obfuscateIfProfane($badWords);
 
@@ -47,7 +47,7 @@ $cleanWords = $check->obfuscateIfProfane($badWords);
 $badWords = array('bad', 'words');
 /* or load from db */
 $badWords = $this->getDoctrine()->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
-      ->getRepository('VangrgProfanityBundle:Profanity')->getProfanitiesArray();
+      ->getRepository(Profanity::class)->getProfanitiesArray();
 
 $this->get('vangrg_profanity.storage')->setProfanities($badWords);
 
