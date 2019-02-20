@@ -20,3 +20,8 @@ services:
             - '@vangrg_profanity.checker'
         tags:
             - { name: validator.constraint_validator }
+
+    Vangrg\ProfanityBundle\Command\ProfanitiesPopulateCommand:
+        arguments:
+            - '@Symfony\Component\DependencyInjection\ContainerInterface'
+        tags: ['console.command']
