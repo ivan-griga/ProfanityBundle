@@ -7,8 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Profanity
- * @package Vangrg\ProfanityBundle\Entity
+ * Class Profanity.
  *
  * @ORM\Table(name="profanities")
  * @ORM\Entity(repositoryClass="Vangrg\ProfanityBundle\Entity\ProfanityRepository")

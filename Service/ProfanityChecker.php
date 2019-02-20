@@ -5,8 +5,7 @@ namespace Vangrg\ProfanityBundle\Service;
 use Vangrg\ProfanityBundle\Storage\ProfanitiesStorageInterface;
 
 /**
- * Class Check
- * @package Vangrg\ProfanityBundle\Service
+ * Class ProfanityChecker.
  */
 class ProfanityChecker
 {

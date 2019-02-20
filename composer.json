@@ -13,18 +13,23 @@
         "MIT"
     ],
     "require": {
-        "php": ">=5.3.9",
-        "symfony/framework-bundle": "^2.7|^3.0|^4.0"
+        "php": "^7.1",
+        "symfony/framework-bundle": "^3.4|^4.0",
+        "symfony/validator": "^3.4|^4.0",
+        "symfony/yaml": "^3.4|^4.0",
+        "symfony/console": "~3.4|~4.0",
+        "doctrine/orm": ">=2.4"
     },
     "suggest": {
-        "doctrine/orm": ">=2.4"
+        "doctrine/doctrine-bundle": "For integration with Doctrine",
+        "doctrine/orm": "For integration with Doctrine ORM"
     },
     "autoload": {
         "psr-4": {"Vangrg\\ProfanityBundle\\": ""}
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "dev-master"
         }
     }
 }
