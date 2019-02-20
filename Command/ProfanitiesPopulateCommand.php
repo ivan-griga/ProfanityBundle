@@ -10,8 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Vangrg\ProfanityBundle\Entity\Profanity;
 
 /**
- * Class ProfanitiesPopulateCommand
- * @package Vangrg\ProfanityBundle\Command
+ * Class ProfanitiesPopulateCommand.
  */
 class ProfanitiesPopulateCommand extends Command
 {
