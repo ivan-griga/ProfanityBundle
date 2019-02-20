@@ -5,8 +5,7 @@ namespace Vangrg\ProfanityBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class ProfanityRepository
- * @package Vangrg\ProfanityBundle\Entity
+ * Class ProfanityRepository.
  */
 class ProfanityRepository extends EntityRepository
 {
