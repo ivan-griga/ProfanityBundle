@@ -46,8 +46,9 @@ $cleanWords = $check->obfuscateIfProfane($badWords);
 /* customized word list from array */
 $badWords = array('bad', 'words');
 /* or load from db */
-$badWords = $this->getDoctrine()->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
-      ->getRepository(Profanity::class)->getProfanitiesArray();
+$badWords = $this->getDoctrine()->getManagerForClass(Profanity::class)
+      ->getRepository(Profanity::class)
+      ->getProfanitiesArray();
 
 $this->get('vangrg_profanity.storage')->setProfanities($badWords);
 
