@@ -43,10 +43,14 @@ class ProfanitiesPopulateCommand extends Command
 
         $connectionName = $input->getOption('connection');
         $em = (empty($connectionName) === true)
-            ? $doctrine->getManagerForClass('Vangrg\ProfanityBundle\Entity\Profanity')
+            ? $doctrine->getManagerForClass(Profanity::class)
             : $doctrine->getManager($connectionName);
 
         $profanities = $this->container->get('vangrg_profanity.storage.default')->getProfanities();
+
+        $existedWords = $em->getRepository(Profanity::class)->getProfanitiesArray();
+
+        $profanities = array_diff($profanities, $existedWords);
 
         $i = 0;
         foreach ($profanities as $word) {
