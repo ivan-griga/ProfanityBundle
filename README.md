@@ -1,3 +1,8 @@
+**Note about fork**: This is a fork of [ivan-griga/ProfanityBundle](https://github.com/ivan-griga/ProfanityBundle), 
+added for testing and upgrading this bundle to be compatible with Symfony 5.  The intent is to 
+merge this code with the original (if possible), once it is brought up to date.  Please do not
+use this directly unless you are part of that update effort.
+
 # Profanity Filter Bundle
 
 A symfony bundle to test if a string has a profanity in it.
