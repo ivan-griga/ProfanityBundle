@@ -234,6 +234,16 @@ class ProfanityChecker
     }
 
     /**
+     * Return first found of profanity
+     *
+     * @return string
+     */
+    public function currentProfanity()
+    {
+        return $this->currentProfanity;
+    }
+
+    /**
      * Obfuscated a 'profanity' in the string.
      *
      * @param $string
