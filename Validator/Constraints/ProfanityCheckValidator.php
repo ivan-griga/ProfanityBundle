@@ -47,6 +47,7 @@ final class ProfanityCheckValidator extends ConstraintValidator
         if ($hasProfanity) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ string }}', $value)
+                ->setParameter('{{ profanity }}', $this->profanityCheck->currentProfanity())
                 ->addViolation();
         }
     }
